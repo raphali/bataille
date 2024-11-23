@@ -76,10 +76,21 @@ def jeu(main_ordi1, main_ordi2): # Définie les régles de jeu
             else:
                 break
     if main_ordi1: # En cas de victoire de l'ordi1
-        print(f"L'ordinateur 1 a gagné en {compteur} tours!")
+        return compteur
     else: # En cas de victoire de l'ordi2
-        print(f"L'ordinateur 2 a gagné en {compteur} tours!")
+        return compteur
 
-deck = init_cards()
-main_ordi1, main_ordi2 = distribution(deck)
-jeu(main_ordi1, main_ordi2)
+
+
+compteur2=[]
+nombres_partie=int(input("Combien de partie souhaitez vous que le programme joue ? : "))
+for i in range(nombres_partie):
+    deck = init_cards()
+    main_ordi1, main_ordi2 = distribution(deck)
+    compteur2.append(jeu(main_ordi1, main_ordi2))
+print(compteur2)
+
+x=max(compteur2)
+y=min(compteur2)
+
+print(f"Le nombre de tours maximum est de : {x} tours, tandis que le nombre de tours minimum est de : {y} tours. ")
