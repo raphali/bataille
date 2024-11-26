@@ -76,21 +76,38 @@ def jeu(main_ordi1, main_ordi2): # Définie les régles de jeu
             else:
                 break
     if main_ordi1: # En cas de victoire de l'ordi1
-        return compteur
+        return compteur, 1
     else: # En cas de victoire de l'ordi2
-        return compteur
+        return compteur, 2
 
+
+def valeur_totale(main):
+    return sum(valeur_cartes(carte) for carte in main)
+
+deck = init_cards()
+main_ordi1, main_ordi2 = distribution(deck)
+print("Valeur totale Ordi 1 :", valeur_totale(main_ordi1))
+print("Valeur totale Ordi 2 :", valeur_totale(main_ordi2))
 
 
 compteur2=[]
+compteurOrdi1=0
+compteurOrdi2=0
+
 nombres_partie=int(input("Combien de partie souhaitez vous que le programme joue ? : "))
 for i in range(nombres_partie):
     deck = init_cards()
     main_ordi1, main_ordi2 = distribution(deck)
-    compteur2.append(jeu(main_ordi1, main_ordi2))
-print(compteur2)
+    compteur, gagnant =(jeu(main_ordi1, main_ordi2))
+    compteur2.append(compteur)
+    if gagnant == 1:
+        compteurOrdi1+=1
+    else:
+        compteurOrdi2+=1
+
 
 x=max(compteur2)
 y=min(compteur2)
 
 print(f"Le nombre de tours maximum est de : {x} tours, tandis que le nombre de tours minimum est de : {y} tours. ")
+print(f"L'ordi 1 a gagné {compteurOrdi1} parties, l'ordi 2 a gagné {compteurOrdi2} parties ")
